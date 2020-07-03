@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <title>Kids for Christ - Error</title>
+    <meta charset="UTF-8">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link href="/style.css" rel="stylesheet"/>
+
+</head>
+<body>
+
+<div class="container register">
+    <div class="row">
+        <div class="col-md-3 register-left">
+            <img src="/cfc-kfc-logo.jpg" alt="Kids for Christ"/>
+            <p class="kfc-quote">Children are a real gift from the Lord. They are a real blessing.(Psalm 127:3)</p>
+            <p></p>
+        </div>
+        <div class="col-md-9 register-right" style="background: pink; text-align: center">
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" style="padding: 25px">
+                    <h2>Error!</h2>
+                    <div class="tab-pane fade show active spacer ">
+                        <p th:text="${message}">Error Info</p>
+                    </div>
+                    <div class="tab-pane fade show active spacer " style="display: flex;align-items: center;flex-flow: column-reverse;">
+                        <a href="/kfc/event/sr-camp" class="btnRegister" style="width: 15%; float: none; margin-top: 15px">Back</a>
+                        <span>If you are having problems signing up, please send an email to <a href="mailto:cfckfchamiltonnz@gmail.com">cfckfchamiltonnz@gmail.com</a></span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

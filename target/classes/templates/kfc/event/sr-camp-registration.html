@@ -1,0 +1,89 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <title>Kids for Christ - Registration</title>
+    <meta charset="UTF-8">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css"/>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+    <link href="/style.css" rel="stylesheet"/>
+
+    <!-- Isolated Version of Bootstrap, not needed if your site already uses Bootstrap -->
+    <link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css"/>
+
+    <!-- Bootstrap Date-Picker Plugin -->
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+</head>
+<body>
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="container register">
+    <div class="row">
+        <div class="col-md-3 register-left">
+            <img src="/cfc-kfc-logo.jpg" alt="Kids for Christ"/>
+            <p class="kfc-quote">Children are a real gift from the Lord. They are a real blessing.(Psalm 127:3)</p>
+            <p></p>
+        </div>
+        <div class="col-md-9 register-right">
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+
+                    <div th:switch="${emailVerified}">
+                        <div th:case="true">
+                            <form action="/kfc/event/sr-camp-registration-confirmation" method="post">
+                                <input type="hidden" name="eventId" th:value="${eventId}"/>
+                                <h3 class="register-heading spacer">Please select child/ren who will join KFC Sr.
+                                    Camp</h3>
+                                <div class="row register-form">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <select class="selectpicker" multiple data-live-search="true" required
+                                                    name="childIds">
+                                                <option th:each="kid: ${srKids}" th:value="${kid.id}"
+                                                        th:text="${kid.preferred_name}"/>
+                                            </select>
+                                        </div>
+                                        <div class="form-group center spacer">
+                                            <input type="submit" class="btnRegister" th:value="Submit"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div th:case="*">
+                            <form action="/kfc/event/sr-camp-registration" method="post">
+                                <div class="registration-success-event">
+                                    <a href="/kfc/user/">Register your details here then sign-up for KFC Sr. Camp</a>
+                                </div>
+
+                                <fieldset class="col-sm-9" style="margin-left: 8%;margin-top: 8%;">
+                                    <legend>Already Registered Your Details?</legend>
+                                    <h3 class="register-heading">Enter email address</h3>
+                                    <div class="row register-form">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" placeholder="email address"
+                                                       name="parent_email" required/>
+                                            </div>
+                                            <div class="form-group center">
+                                                <input type="submit" class="btnRegister" th:value="Submit"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

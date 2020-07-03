@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <title>Kids for Christ - Registration</title>
+    <meta charset="UTF-8">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css"/>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+    <link href="/style.css" rel="stylesheet"/>
+
+    <!-- Isolated Version of Bootstrap, not needed if your site already uses Bootstrap -->
+    <link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css"/>
+
+    <!-- Bootstrap Date-Picker Plugin -->
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+</head>
+<body>
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="container register">
+    <div class="row">
+        <div class="col-md-3 register-left">
+            <img src="/cfc-kfc-logo.jpg" alt="Kids for Christ"/>
+            <p class="kfc-quote">Children are a real gift from the Lord. They are a real blessing.(Psalm 127:3)</p>
+            <p></p>
+        </div>
+        <div class="col-md-9 register-right">
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active spacer ">
+                    <ul class="list-group">
+                        <li class="list-group-item registration-success">Successfully registered to KFC Sr. Camp on Mar. 7-8, 2020!</li>
+                        <li class="list-group-item registered-kids" th:each="confirmedKid: ${confirmedKids}" th:text="${confirmedKid.full_name}"/>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

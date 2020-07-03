@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Kids for Christ - Report</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
+    <script th:inline="javascript">
+        $(document).ready(function () {
+            $("#kidsSummaryReportTable").DataTable({
+                "pageLength": 50,
+                "order": [ 2, "desc" ]
+            });
+
+            $("#event").change(function() {
+                location.href = "/kfc/report/" + $(this).val();
+            });
+        });
+    </script>
+
+    <link type="text/css" rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css}" />
+    <link type="text/css" rel="stylesheet" th:href="@{https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css    }" />
+    <!-- Favicons -->
+    <link href="img/favicon.png" rel="icon">
+    <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
+
+    <!-- Bootstrap CSS File -->
+<!--    <link href="bootstrap.css" rel="stylesheet">-->
+
+    <!-- Libraries CSS Files -->
+    <link href="/font-awesome.css" rel="stylesheet">
+    <link href="/animate.css" rel="stylesheet">
+    <link href="/ionicons.css" rel="stylesheet">
+    <link href="/owl.carousel.css" rel="stylesheet">
+    <link href="/lightbox.css" rel="stylesheet">
+
+    <!-- Main Stylesheet File -->
+    <link href="/style.css" rel="stylesheet"/>
+
+    <!-- =======================================================
+      Theme Name: NewBiz
+      Theme URL: https://bootstrapmade.com/newbiz-bootstrap-business-template/
+      Author: BootstrapMade.com
+      License: https://bootstrapmade.com/license/
+    ======================================================= -->
+</head>
+
+<body>
+
+<!--==========================
+Header
+============================-->
+<header>
+    <div class="container" style="display: flex; align-items: center; flex-direction: column;
+    width: 100%;
+    position: relative;
+    background: url(/intro-bg.png) center bottom no-repeat;
+    background-size: cover;
+    padding: 25px 0 40px 0;">
+
+        <div class="logo float-left" style="margin-top: 0%; background: white;">
+            <!-- Uncomment below if you prefer to use an image logo -->
+            <!-- <h1 class="text-light"><a href="#header"><span>NewBiz</span></a></h1> -->
+            <a href="#intro" class="scrollto"><img src="/kfc-logo-438x80.png" alt="" class="img-fluid"></a>
+        </div>
+        <div style="float: right; color: white; font-size: 20px; padding-top: 1%">
+            Children are a real gift from the Lord. They are a real blessing. (Psalm 127:3)
+        </div>
+
+
+    </div>
+</header><!-- #header -->
+
+<div style="margin-top: 3%;">
+    <div class="container">
+        <select id="event" name="event">
+            <option>-- Please select an event --</option>
+            <option th:each="event: ${kfcEvents}" th:value="${event.name}" th:text="${event.name}" th:selected="${event.name == selectedKfcEvent}"/>
+        </select>
+        <table id="kidsSummaryReportTable" class="table table-striped table-bordered table-hover">
+            <thead>
+            <tr>
+                <th>Full name</th>
+                <th>Preferred name</th>
+                <th>Age</th>
+                <th>Birth date</th>
+                <th>Parent/s Name</th>
+                <th>Parent/s Email</th>
+                <th>View</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="report: ${reportList}">
+                <td th:text="${report.childFullname}" />
+                <td th:text="${report.childPreferredName}" />
+                <td th:text="${report.childAge}" />
+                <td th:text="${report.childBirthdate}" />
+                <td th:text="${report.parentsName}" />
+                <td th:text="${report.parentsEmail}" />
+                <td style="width: 10%">
+                    <a th:href="@{/kfc/user/viewUser/{childId}(childId=${report.childId})}" >View</a> |
+                    <a th:href="@{/kfc/user/editUser/{childId}(childId=${report.childId})}" >Edit</a> | <br/>
+                    <a th:href="@{/kfc/report/pdfreport/{childId}(childId=${report.childId})}" th:target="_blank">Print</a> | <br/>
+                    <a th:href="@{/yfc/report/youth_camp/{childId}(childId=${report.childId})}" th:target="_blank">Print Youth Camp</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
