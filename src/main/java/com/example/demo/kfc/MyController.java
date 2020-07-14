@@ -133,17 +133,17 @@ public class MyController {
             child.setCreatedDate(dateCreated);
 
         // Validate SR before we save!!!!!
-        if (!Utils.isSrKfc(child)) {
-            throw new IllegalArgumentException("Cannot sign up " + child.getFull_name() + ". Child age is only " + Utils.getAge(child) + " years old.");
-        }
+//        if (!Utils.isSrKfc(child)) {
+//            throw new IllegalArgumentException("Cannot sign up " + child.getFull_name() + ". Child age is only " + Utils.getAge(child) + " years old.");
+//        }
 
             childRepository.save(child);
 
-            Event event = eventRepository.findByName("kfc_sr_camp_2020");
+            Event event = eventRepository.findByName("jr_kids_day");
             eventController.signUpChild(child.getId(), event.getId(), new Date());
 
             redir.addFlashAttribute("confirmedKids", child.getFull_name());
-            RedirectView redirectView = new RedirectView(EventController.CONTROLLER_URL + "/sr-camp#what-now", true);
+            RedirectView redirectView = new RedirectView(EventController.CONTROLLER_URL + "/jr-kids-day#what-now", true);
             return redirectView;
         } catch(Exception e) {
             System.out.println("trying to save::: " + formInfo);
